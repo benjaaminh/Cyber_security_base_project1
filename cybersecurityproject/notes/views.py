@@ -2,15 +2,16 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Note
 from django.shortcuts import render, redirect
-
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 
 @login_required
+@csrf_exempt
 def addView(request):
-	if request.method == 'POST':	
-		text = request.POST.get('note') #iban is from input
+	if request.method == 'GET':	
+		text = request.GET.get('note') #iban is from input
 		Note.objects.create(owner=request.user,note=text)#create new account with user and iban input
     
 	return redirect('/')
