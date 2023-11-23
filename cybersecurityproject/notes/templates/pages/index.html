@@ -30,14 +30,15 @@
 		{% endfor %}
 		</ul>
 
-
+       
         <h2>Create a new note</h2>
 
         <form action='add/' method="GET"> <!--change to get-->
             <!--{% csrf_token %}--> <!--csrf token is missing!-->
-
+           
 			<input type="text" name="note"/><br/>
             <input type="submit" value="Send"/>
+            
         </form>
 
         <h2>Change password:</h2>
