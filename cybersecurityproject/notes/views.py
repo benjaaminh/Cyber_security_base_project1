@@ -10,13 +10,14 @@ import sqlite3
 #passwordlogger= logging.getLogger("password_logger")
 
 @login_required
+@csrf_exempt #remove this and add csrf-token in index.html
 def addView(request):
-	#if request.method == 'GET':	
-		#text = request.GET.get('note') #iban is from input
-		#Note.objects.create(owner=request.user,note=text)#create new account with user and iban input
+	#if request.method == 'POST':	
+		#text = request.POST.get('note')
+		#Note.objects.create(owner=request.user,note=text)
 	conn = sqlite3.connect("db.sqlite3")
 	cursor= conn.cursor()
-	text = request.GET.get('note') #iban is from input
+	text = request.POST.get('note') 
 	cursor.execute("INSERT INTO notes_note (note, owner_id) VALUES ('%s',%d)" % (text,request.user.id))
 	conn.commit()
 	#notesLogger.info("New note created: "+text)

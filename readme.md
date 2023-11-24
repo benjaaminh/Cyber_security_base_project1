@@ -36,8 +36,15 @@ With broken access control, restriction on what users are allowed to do is not i
 
 To fix this, we should change the GET requests in both flaws linked to POST requests (which in turn requires CSRF tokens to be enabled), to hide the parameters in the url. Also, we should add the @login_required above the changing password view, so users can't change passwords without logging in.
 
-Flaw 3: 
-SQL injection, in adding a note
+## Flaw 3: [SQL injection](https://owasp.org/Top10/A03_2021-Injection/)
+Source links pinpointing flaw 3: https://github.com/benjaaminh/Cyber_security_base_project1/blob/a7e4874dc20e3003d4a82d6bcd92422b5d3a5bba/cybersecurityproject/notes/views.py#L20C2-L20C2 
+
+SQL injection allows attackers to inject malicious data into a user-input field due to unsanitized user inputs. The parameters given into the user input contains an SQL query which in turn manipulates the database used in the web application. With the SQL query, attackers can delete or modify data and access passwords and other sensitive data. In this application, the function for adding notes is done with an SQL query INSERT INTO, where the parameters are not properly sanitized. Attackers can put their SQL queries into the same field for adding a note to manipulate the database.
+
+To fix this, we should instead use django's standard method of creating objects with models: 
+https://github.com/benjaaminh/Cyber_security_base_project1/blob/a7e4874dc20e3003d4a82d6bcd92422b5d3a5bba/cybersecurityproject/notes/views.py#L14-L16 
+
+
 
 Flaw 4: Logging
 
