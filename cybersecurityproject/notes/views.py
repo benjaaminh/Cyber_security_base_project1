@@ -28,6 +28,7 @@ def homePageView(request):
 	context = {'note': note}#pass context to index.html
 	return render(request, 'pages/index.html',context)
 
+#@login_required
 def changePasswordView(request):
 	#user=User.objects.get(username=request.POST.get("user"))
 	#password= request.POST.get('password')
