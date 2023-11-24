@@ -13,3 +13,5 @@ Broken access control. Users can change each others passwords without logging in
 
 Flaw 3: 
 SQL injection, in adding a note
+
+Flaw 4: Logging

@@ -7,9 +7,10 @@ from django.contrib.auth.models import User
 import urllib.request
 import sqlite3
 from urllib.parse import urlparse
-def index(request):
-	response=urllib.request.urlopen('https://example.com')
-	return HttpResponse("Hello, world. You're at the polls index.")
+
+#import logging
+#notesLogger= logging.getLogger("notes_logger")
+#passwordlogger= logging.getLogger("password_logger")
 
 @login_required
 @csrf_exempt
@@ -23,6 +24,7 @@ def addView(request):
 	cursor.execute("INSERT INTO notes_note (note, owner_id) VALUES ('%s',%d)" % (text,request.user.id))
 	#print("your text: "+text)
 	conn.commit()
+	#notesLogger.info("New note created: "+text)
 	return redirect('/')
 
 @login_required
@@ -39,8 +41,10 @@ def homePageView(request):
 def changePasswordView(request):
 	user=User.objects.get(username=request.GET.get("user"))
 	password= request.GET.get('password')
+	#print(request.body.decode('utf-8'))
 	user.set_password(password)
 	user.save()
+	#notesLogger.info("user "+user.username+" changed their password")
 	return redirect('/')
 
 def csrfView(request):
