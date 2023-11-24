@@ -1,55 +1,57 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Notes app</title>
-    </head>
+
+<head>
+    <title>Notes app</title>
+</head>
 
 
-    <body>
-		<h1>Notes</h1>
+<body>
+    <h1>Notes</h1>
 
-        <table>
-		<tr>
-		<th style="text-align:left">Username: <td>{{user.username}} 
-		</table>
-
-
-        <form action='logout/' method="POST">
-			{% csrf_token %}
-            <input type="submit" value="Logout"/>
-        </form>
-		
-        <h2>Your notes</h2>
-
-		<ul>
-		{% for n in note %}
-
-		<li>{{n.note}}
-		</li>
-
-		{% endfor %}
-		</ul>
-
-       
-        <h2>Create a new note</h2>
-
-        <form action='add/' method="GET"> <!--change to get-->
-            <!--{% csrf_token %}--> <!--csrf token is missing!-->
-           
-			<input type="text" name="note"/><br/>
-            <input type="submit" value="Send"/>
-            
-        </form>
-
-        <h2>Change password:</h2>
-        <form action='changepassword/' method="GET">
-            
-            <input type="hidden" name="user" value="{{user.username}}"/>
-            <input type="password" name="password"/>
-            <input type="submit" value="accept"/>
-        </form>
-    </body>
+    <table>
+        <tr>
+            <th style="text-align:left">Username:
+            <td>{{user.username}}
+    </table>
 
 
-    </body>
+    <form action='logout/' method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Logout" />
+    </form>
+
+    <h2>Your notes</h2>
+
+    <ul>
+        {% for n in note %}
+
+        <li>{{n.note}}
+        </li>
+
+        {% endfor %}
+    </ul>
+
+
+    <h2>Create a new note</h2>
+
+    <form action='add/' method="GET"> <!--change to POST-->
+        <!--{% csrf_token %}--> <!--csrf token is missing!-->
+        <input type="text" name="note" /><br />
+        <input type="submit" value="Send" />
+
+    </form>
+
+    <h2>Change password:</h2>
+    <form action='changepassword/' method="GET"><!--change to POST-->
+    <!--{% csrf_token %}-->
+        <input type="hidden" name="user" value="{{user.username}}" />
+        <input type="password" name="password" />
+        <input type="submit" value="accept" />
+    </form>
+</body>
+
+
+</body>
+
 </html>
