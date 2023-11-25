@@ -105,9 +105,9 @@ To fix the security misconfiguration, we should fix the issues mentioned by the 
 
 2. Afterwards, create a new .env file in the base directory (same as manage.py): https://github.com/benjaaminh/Cyber_security_base_project1/blob/main/cybersecurityproject/.env
 
-3. And put the .env file into the .gitignore file, so version control won't detect it, since the file includes the secret key:
+3. And put the .env file into the .gitignore file, so version control won't detect it, since the file includes the secret key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/989d5bde206d736ae984241b60d815bea4bce3d2/cybersecurityproject/.gitignore#L1C1-L2 The secret key will be saved on the computer locally. 
 
 
 4. Import dotenv library in settings.py:https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/cybersecurityproject/settings.py#L15 
-and load key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/cybersecurityproject/settings.py#L24-L26 
+and load key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/989d5bde206d736ae984241b60d815bea4bce3d2/cybersecurityproject/cybersecurityproject/settings.py#L24-L26
 
