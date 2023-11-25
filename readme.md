@@ -26,7 +26,7 @@ csrf_exempt: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9
 
 GET requests: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/templates/pages/index.html#L46,
 
-https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L37C1-L38C39 
+https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L37-L38
 
 Cross-site request forgery (CSRF) allows attackers to send requests to the target through another source where the attacker is authenticated. The victim may click a link that sends them to a malicious website, which in turn performs commands to actions that may steal or manipulate the victims data. In a website which is vulnerable to CSRF, the malicious commands can be planted in a HTML img tag which in turn runs the command instead of displaying an image. In my project, user bob has a note with a link. When the link is opened, csrf.html is opened and bob's password changes due to the url in the img tag. Some applications only validate the token when the request uses the POST method but skip the validation when the GET method is used. The application uses GET instead of POST to change password, meaning the csrf.html page will be able to change the password without CSRF token
 
@@ -34,13 +34,13 @@ To fix this, we can add {% csrf_token %} to the forms where CSRF token is missin
 https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/templates/pages/index.html#L46
 
 
-and views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L35C1-L36
+and views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/344264279e75e7959b7ab49e0d6a092d6974056f/cybersecurityproject/notes/views.py#L35-L36
 
 as well as removing @csrf_exempt from views.py in adding notes: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L14C22-L14C22 
 
 
 ## Flaw 2: [Broken access control](https://owasp.org/Top10/A01_2021-Broken_Access_Control/)
-Source links pinpointing flaw 2: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L37C1-L38, 
+Source links pinpointing flaw 2: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L37-L38, 
 https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/templates/pages/index.html#L46C2-L46C2, 
 https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L33 
 
@@ -58,7 +58,7 @@ index.html:
 https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/templates/pages/index.html#L46
 
 
-and views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L35C1-L36 
+and views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/344264279e75e7959b7ab49e0d6a092d6974056f/cybersecurityproject/notes/views.py#L35-L36 
 
 Also, we should add the @login_required above the changing password view, so users can't change passwords without logging in: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L33 
 
@@ -68,7 +68,7 @@ Source links pinpointing flaw 3: https://github.com/benjaaminh/Cyber_security_ba
 SQL injection allows attackers to inject malicious data into a user-input field due to unsanitized user inputs. The parameters given into the user input contains an SQL query which in turn manipulates the database used in the web application. With the SQL query, attackers can delete or modify data and access passwords and other sensitive data. In this application, the function for adding notes is done with an SQL query INSERT INTO, where the parameters are not properly sanitized. Attackers can put their SQL queries into the same field for adding a note to manipulate the database.
 
 To fix this, we should instead use django's standard method of creating objects with models: 
-https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L16C2-L18 
+https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L16-L18
 
 
 
@@ -83,9 +83,9 @@ To fix this, We can implement logging using django's built in logging to help sy
 
 Source links pinpointing fixes to flaw 4:
 
-Logging in views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L9C1-L11 
+Logging in views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/344264279e75e7959b7ab49e0d6a092d6974056f/cybersecurityproject/notes/views.py#L9-L11 
 And logging in settings.py: 
-https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/cybersecurityproject/settings.py#L135C1-L167 
+https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/cybersecurityproject/settings.py#L135-L167 
 
 ## Flaw 5: [Security misconfiguration](https://owasp.org/Top10/A05_2021-Security_Misconfiguration/)
 
@@ -105,9 +105,9 @@ To fix the security misconfiguration, we should fix the issues mentioned by the 
 
 2. Afterwards, create a new .env file in the base directory (same as manage.py): https://github.com/benjaaminh/Cyber_security_base_project1/blob/main/cybersecurityproject/.env
 
-3. And put the .env file into the .gitignore file, so version control won't detect it, since the file includes the secret key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/989d5bde206d736ae984241b60d815bea4bce3d2/cybersecurityproject/.gitignore#L1C1-L2 The secret key will be saved on the computer locally. 
+3. And put the .env file into the .gitignore file, so version control won't detect it, since the file includes the secret key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/.gitignore#L1-L2 The secret key will be saved on the computer locally. 
 
 
 4. Import dotenv library in settings.py:https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/cybersecurityproject/settings.py#L15 
-and load key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/989d5bde206d736ae984241b60d815bea4bce3d2/cybersecurityproject/cybersecurityproject/settings.py#L24-L26
+and load key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/main/cybersecurityproject/cybersecurityproject/settings.py#L24-L26
 
