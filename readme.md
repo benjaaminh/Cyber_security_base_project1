@@ -90,7 +90,8 @@ https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecu
 ## Flaw 5: [Security misconfiguration](https://owasp.org/Top10/A05_2021-Security_Misconfiguration/)
 
 Source links pinpointing flaw 5: 
-SECRET_KEY visible: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/cybersecurityproject/settings.py#L29 
+SECRET_KEY visible: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/cybersecurityproject/settings.py#L29
+
 DEBUG=True: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/cybersecurityproject/settings.py#L32C13-L32C13 
 
 With security misconfiguration, we refer to oversights or errors in the configuration of the application. Security might not have been taken into account while configuring the application. A security misconfiguration can lead to a vulnerable application, allowing hackers to access the application more easily. In this application, 
@@ -105,9 +106,8 @@ To fix the security misconfiguration, we should fix the issues mentioned by the 
 
 2. Afterwards, create a new .env file in the base directory (same as manage.py): https://github.com/benjaaminh/Cyber_security_base_project1/blob/main/cybersecurityproject/.env
 
-3. And put the .env file into the .gitignore file, so version control won't detect it, since the file includes the secret key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/.gitignore#L1-L2 The secret key will be saved on the computer locally. 
+3. And put the .env file into the .gitignore file, so version control won't detect it, since the file includes the secret key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/ed9690f63c7c0d14ea153da288bdb25fa78c7c51/cybersecurityproject/.gitignore#L1-L2 The secret key will be saved on the computer locally. 
 
 
 4. Import dotenv library in settings.py:https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/cybersecurityproject/settings.py#L15 
-and load key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/main/cybersecurityproject/cybersecurityproject/settings.py#L24-L26
-
+and load key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/ed9690f63c7c0d14ea153da288bdb25fa78c7c51/cybersecurityproject/cybersecurityproject/settings.py#L24-L26
