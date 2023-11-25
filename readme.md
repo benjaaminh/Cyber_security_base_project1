@@ -46,8 +46,32 @@ https://github.com/benjaaminh/Cyber_security_base_project1/blob/a7e4874dc20e3003
 
 
 
-Flaw 4: Logging
+## Flaw 4: [Logging](https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/)
 
-Flaw 5: security misconfiguration
-The settings.py file is visible for all, meaning the secret key will also be.
-Since debug is set to TRUE, hackers could run the command python manage.py check --deploy, to see all vulnerabilities and potentially gain access to the program thisway. 
+Source links pinpointing flaw 4: yes
+
+Without proper logging, system administrators will not be able to detect activity in the web application. When a password is changed, the system administrator is not able to see the change. An attacker could change another user's password without the system administrator noticing any suspicious activity. 
+
+To fix this, We can implement logging using django's built in logging to help system administrators detect any suspicious activity. With logging, any suspicious action is logged for the system administrator to see. 
+Source links pinpointing fixes to flaw 4: yees.
+
+## Flaw 5: [Security misconfiguration](https://owasp.org/Top10/A05_2021-Security_Misconfiguration/)
+
+Source links pinpointing flaw 5: yeees.
+
+With security misconfiguration, we refer to oversights or errors in the configuration of the application. Security might not have been taken into account while configuring the application. A security misconfiguration can lead to a vulnerable application, allowing hackers to access the application more easily. In this application, 
+the settings.py file is visible for all, meaning the secret key will also be. The secret key is used to encrypt and decrypt sensitive information, which is why it should be hidden. Since debug is set to TRUE, hackers could run the command
+```python manage.py check --deploy``` , to see all vulnerabilities and potentially gain access to the program this way. 
+
+To fix the security misconfiguration, we should fix the issues mentioned by the console when running the previous command while debug=TRUE and fix them. To hide the secret key, we should put it in a .env file. 
+
+To hide the secret key, we will need to install a new dependency by running the command: 
+
+```pip install python-dotenv```
+
+Afterwards, creating a new .env file in the base directory (same as manage.py):
+
+And put the .env file into .gitignore, so version control won't detect it, since the file includes the secret key:
+
+Import dotenv library in settings.py and load key:
+
