@@ -34,7 +34,7 @@ To fix this, we can add {% csrf_token %} to the forms where CSRF token is missin
 https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/templates/pages/index.html#L46
 
 
-and views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/344264279e75e7959b7ab49e0d6a092d6974056f/cybersecurityproject/notes/views.py#L35-L36
+and views.py (comment out GET request and comment in POST request): https://github.com/benjaaminh/Cyber_security_base_project1/blob/344264279e75e7959b7ab49e0d6a092d6974056f/cybersecurityproject/notes/views.py#L35-L36
 
 as well as removing @csrf_exempt from views.py in adding notes: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L14C22-L14C22 
 
@@ -58,7 +58,7 @@ index.html:
 https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/templates/pages/index.html#L46
 
 
-and views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/344264279e75e7959b7ab49e0d6a092d6974056f/cybersecurityproject/notes/views.py#L35-L36 
+and views.py(comment out GET request and comment in POST request): https://github.com/benjaaminh/Cyber_security_base_project1/blob/344264279e75e7959b7ab49e0d6a092d6974056f/cybersecurityproject/notes/views.py#L35-L36 
 
 Also, we should add the @login_required above the changing password view, so users can't change passwords without logging in: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L33 
 
@@ -68,9 +68,10 @@ Source links pinpointing flaw 3: https://github.com/benjaaminh/Cyber_security_ba
 SQL injection allows attackers to inject malicious data into a user-input field due to unsanitized user inputs. The parameters given into the user input contains an SQL query which in turn manipulates the database used in the web application. With the SQL query, attackers can delete or modify data and access passwords and other sensitive data. In this application, the function for adding notes is done with an SQL query INSERT INTO, where the parameters are not properly sanitized. Attackers can put their SQL queries into the same field for adding a note to manipulate the database.
 
 To fix this, we should instead use django's standard method of creating objects with models: 
-https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L16-L18
+https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L16-L18 
 
-
+as well as commenting out these lines: 
+https://github.com/benjaaminh/Cyber_security_base_project1/blob/ddea8a15b6115cb9c2e43b0d9d7f78f0e7e4d4c8/cybersecurityproject/notes/views.py#L19-L23
 
 ## Flaw 4: [Logging](https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/)
 
@@ -83,7 +84,7 @@ To fix this, We can implement logging using django's built in logging to help sy
 
 Source links pinpointing fixes to flaw 4:
 
-Logging in views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/344264279e75e7959b7ab49e0d6a092d6974056f/cybersecurityproject/notes/views.py#L9-L11 
+Logging in views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/344264279e75e7959b7ab49e0d6a092d6974056f/cybersecurityproject/notes/views.py#L9-L11, https://github.com/benjaaminh/Cyber_security_base_project1/blob/ddea8a15b6115cb9c2e43b0d9d7f78f0e7e4d4c8/cybersecurityproject/notes/views.py#L24C38-L24C38, https://github.com/benjaaminh/Cyber_security_base_project1/blob/ddea8a15b6115cb9c2e43b0d9d7f78f0e7e4d4c8/cybersecurityproject/notes/views.py#L41 
 And logging in settings.py: 
 https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/cybersecurityproject/settings.py#L135-L167 
 
@@ -111,3 +112,5 @@ To fix the security misconfiguration, we should fix the issues mentioned by the 
 
 4. Import dotenv library in settings.py:https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/cybersecurityproject/settings.py#L15 
 and load key: https://github.com/benjaaminh/Cyber_security_base_project1/blob/ed9690f63c7c0d14ea153da288bdb25fa78c7c51/cybersecurityproject/cybersecurityproject/settings.py#L24-L26
+
+5. Remove the SECRET_KEY in settings.py to hide it
