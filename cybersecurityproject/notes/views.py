@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 import sqlite3
 
+#logging needed!
 #import logging
 #notesLogger= logging.getLogger("notes_logger")
 #passwordlogger= logging.getLogger("password_logger")

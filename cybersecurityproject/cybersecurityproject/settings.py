@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+#from dotenv import load_dotenv, find_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,6 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+#load_dotenv(find_dotenv())
+
+#SECRET_KEY= os.environ['SECRET_KEY']
+
+
 SECRET_KEY = 'django-insecure-5boot37a%*vb@2y0=^$3eltj7xk-3k%&m+b3k@ch!hd*4(5u33'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -125,6 +131,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#logging needed
 """
 LOGGING = {
     "version": 1,
