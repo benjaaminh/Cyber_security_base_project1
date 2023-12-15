@@ -33,34 +33,34 @@ Cross-site request forgery (CSRF) allows attackers to send requests to the targe
 To fix this, we can add {% csrf_token %} to the forms where CSRF token is missing in index.html to add the protection, as well as changing the GET request to POST request in both index.html: 
 https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/templates/pages/index.html#L46
 
+and views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L36
 
-and views.py (comment out GET request and comment in POST request): https://github.com/benjaaminh/Cyber_security_base_project1/blob/344264279e75e7959b7ab49e0d6a092d6974056f/cybersecurityproject/notes/views.py#L35-L36
+Since changing password now works by a POST request, we replace user retrieval with:
+https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L35
 
 as well as removing @csrf_exempt from views.py in adding notes: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L14C22-L14C22 
 
 
 ## Flaw 2: [Broken access control](https://owasp.org/Top10/A01_2021-Broken_Access_Control/)
 Source links pinpointing flaw 2: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L37-L38, 
-https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/templates/pages/index.html#L46C2-L46C2, 
 https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L33 
 
 With broken access control, restriction on what users are allowed to do is not implemented. The web application can store data through e.g a path variable. The variable can be modified which in turn allows the user to gain access to data that they shouldnt be able to access. The program may not check for authorization, allowing users with basic privileges access administrative features. Weak authentication, such as weak password policies or lack of multi-factor authentication is also included in broken access control. In this application, users are able to change eachothers passwords. They can also change passwords without logging in. Opening the link http://localhost:8000/changepassword/?user=bob&password=hacked while the server is running will change user bob's password to hacked. 
 
-To fix this, we should change the GET requests in flaws linked to POST requests (which in turn requires CSRF tokens to be enabled), to hide the parameters in the url. So, add CSRF tokens in index.html as in the fix to flaw 1 and remove @csrf_exempt from views.py: 
-CSRF tokens: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/templates/pages/index.html#L39C1-L39C1, 
-
-https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/templates/pages/index.html#L47C1-L47C1,
-
-csrf_exempt: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L14C22-L14C22 
-
-And change GET to POST request: 
-index.html: 
+To fix this, we should change the GET requests in flaws linked to POST requests to hide the parameters in the url:
+index.html:
 https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/templates/pages/index.html#L46
 
+and views.py: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L36
 
-and views.py(comment out GET request and comment in POST request): https://github.com/benjaaminh/Cyber_security_base_project1/blob/344264279e75e7959b7ab49e0d6a092d6974056f/cybersecurityproject/notes/views.py#L35-L36 
+To require logging in when changing password, we can change how we get the user object by using request.user: 
+https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L35
 
-Also, we should add the @login_required above the changing password view, so users can't change passwords without logging in: https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L33 
+And adding @login_required: 
+https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/views.py#L33 
+
+Since we changed GET requests to POST requests, CSRF tokens are now required since POST requests can not be done without them, so we need to comment them back in: 
+https://github.com/benjaaminh/Cyber_security_base_project1/blob/master/cybersecurityproject/notes/templates/pages/index.html#L47
 
 ## Flaw 3: [SQL injection](https://owasp.org/Top10/A03_2021-Injection/)
 Source links pinpointing flaw 3: https://github.com/benjaaminh/Cyber_security_base_project1/blob/8c9cc64e1216055c29cd7c05a37185fc66f24af9/cybersecurityproject/notes/views.py#L22 
