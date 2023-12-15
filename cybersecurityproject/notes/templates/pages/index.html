@@ -43,7 +43,7 @@
     </form>
 
     <h2>Change password:</h2>
-    <form action='changepassword/' method="POST"><!--change to POST-->
+    <form action='changepassword/' method="GET"><!--change to POST-->
         <!--{% csrf_token %}-->
         <input type="hidden" name="user" value="{{user.username}}" />
         <input type="password" name="password" />
