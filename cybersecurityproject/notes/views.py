@@ -26,18 +26,20 @@ def addView(request):
 
 @login_required
 def homePageView(request):
-	note = Note.objects.filter(owner=request.user) #only show users accounts
+	note = Note.objects.filter(owner=request.user) #only show users notes
 	context = {'note': note}#pass context to index.html
 	return render(request, 'pages/index.html',context)
 
-#@login_required
+@login_required
 def changePasswordView(request):
-	#user=User.objects.get(username=request.POST.get("user"))
+	#user = request.user
 	#password= request.POST.get('password')
 	user=User.objects.get(username=request.GET.get("user"))
 	password= request.GET.get('password')
-	user.set_password(password)
-	user.save()
+	if (password):
+		user.set_password(password)
+		user.save()
+	
 	#notesLogger.info("user "+user.username+" changed their password")
 	return redirect('/')
 
